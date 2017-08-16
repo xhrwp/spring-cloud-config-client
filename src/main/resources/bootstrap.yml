@@ -1,0 +1,28 @@
+eureka:
+  client:
+    serviceUrl:
+          defaultZone: http://localhost:8888/eureka/
+spring:
+  application:
+    name: spring-cloud-config-client
+  profiles:
+    active: dev
+  cloud:
+    config:
+      label: master
+      uri: http://localhost:8888
+      name: client
+    bus:
+      ack:
+        enabled: true
+      refresh:
+        enabled: true
+      env:
+        enabled: true
+      trace:
+        enabled: true
+  rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest

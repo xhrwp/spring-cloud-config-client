@@ -1,7 +1,3 @@
-eureka:
-  client:
-    serviceUrl:
-          defaultZone: http://localhost:8888/eureka/
 spring:
   application:
     name: spring-cloud-config-client
@@ -10,8 +6,12 @@ spring:
   cloud:
     config:
       label: master
-      uri: http://localhost:8888
-      name: client
+      ##uri: http://localhost:8888  通过注册中心 实现 不需要指定server的url
+      name: config-client
+      discovery:
+        enabled: true
+        ## 指定server端的name,也就是server端spring.application.name的值
+        service-id: spring-cloud-config-server
     bus:
       ack:
         enabled: true
@@ -26,3 +26,11 @@ spring:
       port: 5672
       username: guest
       password: guest
+
+## 注册中心eurka地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/,http://localhost:9003/eureka/
+server:
+  port: 8000
